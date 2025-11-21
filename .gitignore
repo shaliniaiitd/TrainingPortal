@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# IDE / Editor settings
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Playwright
+test-results/
+playwright-report/
+.traces/
+.traces.zip
+playwright/.cache/
+
+# Pytest cache
+.pytest_cache/
+
+# Environment variables
+.env.local
+.env.development
+.env.production
+
+# Coverage
+.coverage
+htmlcov/

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<style>
+    #content {
+        position: relative;
+    }
+    #content img {
+        position: absolute;
+        top:10px;
+        right:20px;
+    }
+</style>
+
+<div id="content">
+    <img src="{% static 'logo.jpg' %}" class="ribbon" alt="Connect Champs" width="50" height="60"/>
+    <div></div>
+</div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <a href = '//localhost:8000/myapp'>HOME</a>
+
+{% block mymessage %}
+{% endblock %}
+</body>
+</html>

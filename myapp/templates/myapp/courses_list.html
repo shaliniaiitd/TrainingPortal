@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block mymessage %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/base.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course List</title>
+</head>
+<body>
+<center><h1>COURSES WE ARE OFFERING</h1></center>
+<table border="1">
+
+    <td>S.No.</td>
+    <td>COURSENAME</td>
+    <td>FACULTYNAME</td>
+    <td>STARTDATE</td>
+    <td>ENDDATE</td>
+
+{% for x in object_list  %}
+    <tr>
+<td><a href="update/{{ x.id }}">{{ x.id }}</a></td>
+<td><a href="{{ x.id}}/detail/">{{ x.coursename }}</a></td>
+<td>{{ x.facultyname }}</td>
+<td>{{ x.startdate }}</td>
+        <td>{{ x.enddate }}</td>
+
+    <td><a href="{{ x.id }}/delete/">delete</a></td>
+</tr>
+{% endfor %}
+</table>
+
+<p>
+<a href="addcourse/">Add course</a>
+</body>
+</html>
+{% endblock %}

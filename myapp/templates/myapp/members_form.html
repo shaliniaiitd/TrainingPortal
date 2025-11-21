@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block mymessage %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/base.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Member</title>
+</head>
+<body>
+<center><h1>ADD A MEMBER</h1></center>
+<form method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save"  >
+</form>
+</body>
+</html>
+{% endblock %}

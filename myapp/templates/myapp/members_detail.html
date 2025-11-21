@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block mymessage %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/base.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MEMBER DETAILS</title>
+</head>
+<body>
+<center><h1>  {{ object.firstname }} {{ object.lastname}} </h1></center>
+<br>
+<br>
+
+{% if not  object.image   %}
+<center><img src= "{% get_media_prefix %}images/icon8.jpg" alt="image of member" width="150" height="150"></center>
+{% else %}
+<center><img src= "{% get_media_prefix %}{{ object.image }}" alt="image of member" width="150" height="150"></center>
+{% endif %}
+
+<br>
+<center><h3>DESIGNATION: {{ object.designation }}</h3></center>
+<br>
+<center><h3>COURSES TRAINING:</h3></center>
+{% for x in courses %}
+<center><h4> {{x.coursename}}</h4></center>
+{% endfor %}
+<center><h3>DATE: {{ now|date }}</h3></center>
+</body>
+</html>
+{% endblock %}

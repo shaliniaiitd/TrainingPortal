@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update course</title>
+</head>
+<body>
+
+<h1>Update Course</h1>
+
+{% with val1="{{mycourse.coursename}}" %}
+
+<h2>You are about to update this course {{val1}} </h2>
+
+{% endwith %}
+
+<form action="updatecourse/{{ mycourse.id }}" method="post">
+{% csrf_token %}
+Course Name:<br>
+<input name="course" value="{{ mycourse.coursename }}">
+<br><br>
+Faulty Name:<br>
+<input name="faculty" value="{{ mycourse.facultyname }}">
+<br><br>
+    startdate:<br>
+<input name="startdate" value="{{ mycourse.startdate }}">
+<br><br>
+    enddate:<br>
+<input name="enddate" value="{{ mycourse.enddate }}">
+<br><br>
+
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>

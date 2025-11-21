@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% block mymessage %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles/base.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Details</title>
+</head>
+<body>
+<center><h1>COURSE DETAILS </h1></center>
+<br>
+<center><h3>CourseName: {{ object.coursename }}</h3></center>
+
+<center><h4>Taught By: {{ object.facultyname}}</h4></center>
+<center><h4>Starts on: {{ object.startdate|date }}</h4></center>
+<center><h4>Ends on: {{ object.enddate|date }}</h4></center>
+<br>
+<center><h2> FOLLOWING STUDENTS ARE ENROLLED IN THIS COURSE</h2></center>
+<br>
+
+<center><table border="1">
+
+    <td>S.No.</td>
+    <td>FIRSTNAME</td>
+    <td>LASTNAME</td>
+    <td>SKILLS</td>
+    <td>DATE OF JOINING</td>
+    <td>EMAIL</td>
+    <td>RESUME</td>
+    <td>ACTION</td>
+{% for x in students %}
+    <tr>
+<td><a href="update/{{ x.id }}">{{ x.id }}</a></td>
+<td><a href="detail/{{ x.id }}">{{ x.firstname }}</a></td>
+<td>{{ x.lastname }}</td>
+<td>{{ x.skills }}</td>
+        <td>{{ x.doj }}</td>
+        <td>{{ x.email }}</td>
+        <td>{{ x.resume }}</td>
+
+    <td><a href="delete/{{ x.id }}">delete</a></td>
+    <!-- <td><a href="addimage/{{x.id}}">add image</a></td> -->
+</tr>
+{% endfor %}
+</table></center>
+
+</body>
+</html>
+{% endblock %}
+

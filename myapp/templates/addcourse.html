@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Course</title>
+</head>
+<body>
+
+<form action="addcourse/" method="post">
+{% csrf_token %}
+Course Name:<br>
+<input name="course">
+<br><br>
+Date started:<br>
+<input name="startdate">
+<br><br>
+Date ending:<br>
+<input name="enddate">
+<br><br>
+Faculty Name:<br>
+<input name="faculty">
+<br><br>
+CATEGORY:<br>
+<input name="category">
+<br><br>
+
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+</body>
+</html>

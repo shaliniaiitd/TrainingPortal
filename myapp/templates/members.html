@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Members</title>
+</head>
+<body>
+<h1>Meet our members</h1>
+<table border="1">
+
+    <td>S.No.</td>
+    <td>FIRSTNAME</td>
+    <td>LASTNAME</td>
+    <td>DESIGNATION</td>
+{% for x in object_list %}
+    <tr>
+<td><a href="update/{{ x.id }}">{{ x.id }}</a></td>
+<td>{{ x.firstname }}</td>
+<td>{{ x.lastname }}</td>
+<td>{{ x.designation }}</td>
+    <td><a href="delete/{{ x.id }}">delete</a></td>
+</tr>
+  {#  </li> #}
+{% endfor %}
+</table>
+
+<p>
+<a href="addmember/">Add member</a>
+</body>
+</html>

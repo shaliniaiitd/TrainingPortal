@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+</head>
+<body>
+<h1>Courses we offer</h1>
+<table border="1">
+
+    <td>S.No.</td>
+    <td>COURSENAME</td>
+    <td>FACULTYNAME</td>
+    <td>STARTDATE</td>
+    <td>ENDDATE</td>
+
+{% for x in mycourses %}
+    <tr>
+<td><a href="update/{{ x.id }}">{{ x.id }}</a></td>
+<td>{{ x.coursename }}</td>
+<td>{{ x.facultyname }}</td>
+<td>{{ x.startdate }}</td>
+        <td>{{ x.enddate }}</td>
+
+    <td><a href="delete/{{ x.id }}">delete</a></td>
+</tr>
+{% endfor %}
+</table>
+
+<p>
+<a href="addcourse/">Add course</a>
+</body>
+</html>
