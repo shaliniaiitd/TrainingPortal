@@ -7,7 +7,7 @@ and link functionality.
 """
 
 import pytest
-from TrainingPortal.tests.ui.base_test import BaseTestClass
+from tests.ui.base_test import BaseTestClass
 
 @pytest.mark.page("home")
 class TestHomepage(BaseTestClass):
@@ -141,7 +141,7 @@ class TestHomepage(BaseTestClass):
         members = self.get_page("members")
         
         # Start at members
-        members.goto_members_list()
+        members.goto_page()
         assert "/members" in members.get_current_url()
         
         # Navigate to home using home page object

@@ -1,0 +1,227 @@
+.
+├── db.sqlite3
+├── __init__.py
+├── manage.py
+├── media
+│   └── images
+│       ├── icon8.jpg
+│       ├── member.jpg
+│       └── p19.jpg
+├── myapp
+│   ├── admin.py
+│   ├── api_views.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── migrations
+│   │   ├── 0001_initial.py
+│   │   ├── 0002_members_designation.py
+│   │   ├── 0003_courses.py
+│   │   ├── 0004_user_alter_members_designation.py
+│   │   ├── 0005_remove_user_e_mail.py
+│   │   ├── 0006_user_email.py
+│   │   ├── 0007_members_image.py
+│   │   ├── 0008_uploadimage_alter_members_image.py
+│   │   ├── 0009_alter_members_image.py
+│   │   ├── 0010_alter_uploadimage_image.py
+│   │   ├── 0011_remove_members_image_members_image_id.py
+│   │   ├── 0012_remove_members_image_id_members_image.py
+│   │   ├── 0013_rename_image_members_image_id.py
+│   │   ├── 0014_alter_members_image_id.py
+│   │   ├── 0015_alter_members_image_id.py
+│   │   ├── 0016_remove_members_image_id_members_image.py
+│   │   ├── 0017_remove_members_image_members_image_id.py
+│   │   ├── 0018_alter_uploadimage_image.py
+│   │   ├── 0019_alter_uploadimage_caption.py
+│   │   ├── 0020_alter_uploadimage_caption.py
+│   │   ├── 0021_user_image_alter_uploadimage_caption_and_more.py
+│   │   ├── 0022_memberimage_remove_members_image_id_members_image_and_more.py
+│   │   ├── 0023_student_delete_memberimage.py
+│   │   ├── 0024_alter_student_email_alter_student_resume_and_more.py
+│   │   ├── 0025_alter_student_email_alter_student_resume_and_more.py
+│   │   ├── __init__.py
+│   │   └── __pycache__
+│   ├── models.py
+│   ├── __pycache__
+│   │   ├── admin.cpython-310.pyc
+│   │   ├── admin.cpython-312.pyc
+│   │   ├── api_views.cpython-312.pyc
+│   │   ├── apps.cpython-310.pyc
+│   │   ├── apps.cpython-312.pyc
+│   │   ├── forms.cpython-310.pyc
+│   │   ├── forms.cpython-312.pyc
+│   │   ├── __init__.cpython-310.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── models.cpython-310.pyc
+│   │   ├── models.cpython-312.pyc
+│   │   ├── redoc_urls.cpython-312.pyc
+│   │   ├── serializers.cpython-312.pyc
+│   │   ├── swagger_urls.cpython-312.pyc
+│   │   ├── urls.cpython-310.pyc
+│   │   ├── urls.cpython-312.pyc
+│   │   ├── views.cpython-310.pyc
+│   │   └── views.cpython-312.pyc
+│   ├── redoc_urls.py
+│   ├── serializers.py
+│   ├── static
+│   │   ├── courses.jpg
+│   │   ├── logo.jpg
+│   │   ├── m.jpg
+│   │   └── styles
+│   ├── swagger_urls.py
+│   ├── templates
+│   │   ├── addcourse.html
+│   │   ├── addmember_form.html
+│   │   ├── addmember.html
+│   │   ├── base.html
+│   │   ├── courses.html
+│   │   ├── image_form.html
+│   │   ├── index.html
+│   │   ├── login.html
+│   │   ├── members.html
+│   │   ├── myapp
+│   │   ├── registration
+│   │   ├── updatecourse.html
+│   │   └── updatemember.html
+│   ├── urls.py
+│   └── views.py
+├── __pycache__
+│   └── __init__.cpython-312.pyc
+├── pytest.ini
+├── README.md
+├── requirements.txt
+├── test_execution.log
+├── tests
+│   ├── api_async
+│   │   ├── api_models.py
+│   │   ├── base_api_test.py
+│   │   ├── conftest_backup.py
+│   │   ├── conftest.py
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── test_api_member.py
+│   │   ├── test_broken_links.py
+│   │   ├── test_caching.py
+│   │   ├── test_concurrency.py
+│   │   ├── test_config.py
+│   │   ├── test_courses_api.py
+│   │   ├── test_dead_links.py
+│   │   ├── test_example.py
+│   │   ├── test_members_api.py
+│   │   ├── test_members_crud.py
+│   │   ├── test_members_negative.py
+│   │   ├── test_rate_limiting.py
+│   │   ├── test_response_time.py
+│   │   └── test_students_api.py
+│   ├── api_sync
+│   │   ├── conftest.py
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   └── test_dead_links.py
+│   ├── conftest.py
+│   ├── db
+│   │   ├── __pycache__
+│   │   ├── README.md
+│   │   ├── schema_validator.py
+│   │   ├── test_validators.py
+│   │   ├── validation_runner.py
+│   │   └── validators.py
+│   ├── generate_test_data.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── conftest.cpython-312-pytest-7.4.4.pyc
+│   │   ├── conftest.cpython-312-pytest-8.4.2.pyc
+│   │   ├── conftest.cpython-312-pytest-9.0.1.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── test_config.cpython-312-pytest-8.4.2.pyc
+│   │   ├── test_config.cpython-312-pytest-9.0.1.pyc
+│   │   └── test_data_factory.cpython-312-pytest-8.4.2.pyc
+│   ├── README.md
+│   ├── setup_test_data.py
+│   ├── test_config.py
+│   ├── test_data
+│   │   ├── generate_test_data.py
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   ├── README.md
+│   │   ├── setup_test_data.py
+│   │   ├── test_data_factory.py
+│   │   └── test_data_provider.py
+│   ├── test_data_factory.py
+│   └── ui
+│       ├── base_test.py
+│       ├── conftest.py
+│       ├── __init__.py
+│       ├── pages
+│       ├── __pycache__
+│       ├── test_add_member.py
+│       ├── test_courses_crud.py
+│       ├── test_homepage.py
+│       ├── test_members_crud.py
+│       ├── test_members_list.py
+│       └── test_students_crud.py
+├── TrainingPortal
+│   ├── asgi.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-310.pyc
+│   │   ├── __init__.cpython-312.pyc
+│   │   ├── settings.cpython-310.pyc
+│   │   ├── settings.cpython-312.pyc
+│   │   ├── urls.cpython-310.pyc
+│   │   ├── urls.cpython-312.pyc
+│   │   ├── wsgi.cpython-310.pyc
+│   │   └── wsgi.cpython-312.pyc
+│   ├── settings.py
+│   ├── try.py
+│   ├── urls.py
+│   └── wsgi.py
+├── tree
+├── utils
+│   ├── api_auth_client.py
+│   ├── api_auth_client_sync.py
+│   ├── api_client.py
+│   ├── api_client_sync.py
+│   ├── api_helpers.py
+│   ├── auth_client.py
+│   ├── config.py
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── api_auth_client.cpython-312.pyc
+│   │   ├── api_auth_client_sync.cpython-312.pyc
+│   │   ├── api_client.cpython-312.pyc
+│   │   ├── auth_client.cpython-312.pyc
+│   │   ├── config.cpython-312.pyc
+│   │   └── __init__.cpython-312.pyc
+│   └── token_manager.py
+└── venv
+    ├── bin
+    │   ├── activate
+    │   ├── activate.csh
+    │   ├── activate.fish
+    │   ├── Activate.ps1
+    │   ├── django-admin
+    │   ├── jsonschema
+    │   ├── normalizer
+    │   ├── pip
+    │   ├── pip3
+    │   ├── pip3.12
+    │   ├── playwright
+    │   ├── pygmentize
+    │   ├── py.test
+    │   ├── pytest
+    │   ├── python -> python3
+    │   ├── python3 -> /usr/bin/python3
+    │   ├── python3.12 -> python3
+    │   ├── slugify
+    │   ├── sqlformat
+    │   └── wsdump
+    ├── include
+    │   ├── python3.12
+    │   └── site
+    ├── lib
+    │   └── python3.12
+    ├── lib64 -> lib
+    └── pyvenv.cfg
+
+38 directories, 187 files

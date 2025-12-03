@@ -1,111 +1,102 @@
-"""
-Pytest configuration for test data providers.
-Provides fixtures for different provider types using the factory pattern.
-
-This file should be at tests/ level so pytest can discover it automatically.
-"""
-
-import pytest
 import os
-import sys
+import pytest
+from rest_framework.test import APIClient
+from django.contrib.auth import get_user_model
 
-# Add test_data directory to path to import from it
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), "test_data"))
+# Django sync safety override
+os.environ.setdefault("DJANGO_ALLOW_ASYNC_UNSAFE", "true")
 
-from test_data_factory import TestDataFactory, DataSourceType
+################################################################################
+#                               DRF CLIENTS and JWT Authentication
+################################################################################
+
+@pytest.fixture
+def api_client():
+    return APIClient()
+
+
+@pytest.fixture
+def auth_client(api_client, db):
+    User = get_user_model()
+    user = User.objects.create_superuser(
+        username="admin",
+        email="admin@example.com",
+        password="admin123"
+    )
+    api_client.force_authenticate(user)
+    return api_client
+
+
+################################################################################
+#                               PLAYWRIGHT SYNC
+################################################################################
+
+from playwright.sync_api import sync_playwright
 
 
 @pytest.fixture(scope="session")
-def test_data_provider():
+def playwright():
+    with sync_playwright() as p:
+        yield p
+
+
+################################################################################
+#         🔥 APIRequestContext fixtures (for API tests (with django)) 🔥
+################################################################################
+
+@pytest.fixture
+def context(playwright, db):
     """
-    Fixture: Provide test data provider for the entire session.
-    Auto-detects provider type from default test data source.
+    Unauthenticated API client using Playwright’s request.new_context().
     """
-    # Try multiple sources in order of preference
-    sources = [
-        ("tests/test_data/test_data.xlsx", DataSourceType.EXCEL),
-        ("tests/test_data/test_data.json", DataSourceType.JSON),
-        ("sqlite:///tests/test_data/test_data.db", DataSourceType.DATABASE),
-    ]
-
-    provider = None
-    for source, provider_type in sources:
-        try:
-            if provider_type == DataSourceType.DATABASE or os.path.exists(source):
-                provider = TestDataFactory.create_provider(
-                    source,
-                    provider_type=provider_type
-                )
-                provider.print_summary()
-                break
-        except Exception as e:
-            continue
-
-    if provider is None:
-        raise RuntimeError(
-            "No test data source found. Generate with: python tests/test_data/generate_test_data.py"
-        )
-
-    yield provider
-
-    # Cleanup
-    if hasattr(provider, 'close'):
-        provider.close()
+    return playwright.request.new_context(base_url="http://localhost:8000")
 
 
 @pytest.fixture
-def member_data(test_data_provider):
-    """Fixture: Get next member test data."""
-    test_data_provider.reset_index("Members")
-    return test_data_provider.get_next_data("Members")
+def auth_context(playwright, db):
+    """
+    Authenticated API client compatible with async-style tests:
+    auth_context.get(url=...) should work.
+    """
+    User = get_user_model()
+
+    user = User.objects.create_superuser(
+        username="admin2",
+        email="admin2@example.com",
+        password="admin123",
+    )
+
+    # manual JWT creation (Playwright only supports headers)
+    from rest_framework_simplejwt.tokens import RefreshToken
+    refresh = RefreshToken.for_user(user)
+    token = str(refresh.access_token)
+
+    return playwright.request.new_context(
+        base_url="http://localhost:8000",
+        extra_http_headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+        }
+    )
+
+
+################################################################################
+#                    🔥 UI FIXTURES (keep old behavior intact) 🔥
+################################################################################
+
+@pytest.fixture(scope="session")
+def browser(playwright):
+    browser = playwright.chromium.launch(headless=True)
+    yield browser
+    browser.close()
 
 
 @pytest.fixture
-def course_data(test_data_provider):
-    """Fixture: Get next course test data."""
-    test_data_provider.reset_index("Courses")
-    return test_data_provider.get_next_data("Courses")
-
-
-@pytest.fixture
-def student_data(test_data_provider):
-    """Fixture: Get next student test data."""
-    test_data_provider.reset_index("Students")
-    return test_data_provider.get_next_data("Students")
-
-
-@pytest.fixture
-def all_members_data(test_data_provider):
-    """Fixture: Get all members test data."""
-    return test_data_provider.get_members_data()
-
-
-@pytest.fixture
-def all_courses_data(test_data_provider):
-    """Fixture: Get all courses test data."""
-    return test_data_provider.get_courses_data()
-
-
-@pytest.fixture
-def all_students_data(test_data_provider):
-    """Fixture: Get all students test data."""
-    return test_data_provider.get_students_data()
-
-
-# Convenience fixtures using factory
-@pytest.fixture
-def excel_provider():
-    """Fixture: Provide Excel test data provider."""
-    return TestDataFactory.create_provider("tests/test_data/test_data.xlsx")
-
-
-@pytest.fixture
-def json_provider():
-    """Fixture: Provide JSON test data provider."""
-    return TestDataFactory.create_provider("tests/test_data/test_data.json")
-
-
-@pytest.fixture
-def db_provider():
-    """Fixture: Provide Database test data provider."""
-    return TestDataFactory.create_provider("sqlite:///tests/test_data/test_data.db")
+def page(browser):
+    """
+    UI test Page object.
+    """
+    context = browser.new_context()
+    page = context.new_page()
+    yield page
+    context.close()

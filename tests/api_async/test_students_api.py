@@ -1,12 +1,12 @@
 """Students API Tests.
 
-Tests CRUD operations on /api/students/ endpoint.
+Tests CRUD operations on /api_async/students/ endpoint.
 Inherits from BaseApiTestClass and uses data models from api_models.
 """
 
 import pytest
-from tests.api.base_api_test import BaseApiTestClass
-from tests.api.api_models import (
+from tests.api_async.base_api_test import BaseApiTestClass
+from tests.api_async.api_models import (
     StudentRequest, StudentResponse, ApiValidator
 )
 
@@ -17,7 +17,7 @@ class TestStudentsAPI(BaseApiTestClass):
     STUDENTS_ENDPOINT = "students"
 
     def test_list_students(self):
-        """Test: GET /api/students/ returns student list."""
+        """Test: GET /api_async/students/ returns student list."""
         response = self.get(self.STUDENTS_ENDPOINT)
 
         (self.validate(response)
@@ -32,7 +32,7 @@ class TestStudentsAPI(BaseApiTestClass):
             ApiValidator.assert_field_not_empty(validated, "name")
 
     def test_create_student(self):
-        """Test: POST /api/students/ creates a new student."""
+        """Test: POST /api_async/students/ creates a new student."""
         payload = StudentRequest(
             name="API Test Student",
             course_id=1,  # Assume course id=1 exists
@@ -53,7 +53,7 @@ class TestStudentsAPI(BaseApiTestClass):
         self.created_student_id = created.id
 
     def test_get_student_detail(self):
-        """Test: GET /api/students/{id}/ returns student detail."""
+        """Test: GET /api_async/students/{id}/ returns student detail."""
         student_id = 1
         response = self.get(f"{self.STUDENTS_ENDPOINT}/{student_id}")
 
@@ -65,7 +65,7 @@ class TestStudentsAPI(BaseApiTestClass):
         assert student.id == student_id
 
     def test_update_student(self):
-        """Test: PUT /api/students/{id}/ updates student."""
+        """Test: PUT /api_async/students/{id}/ updates student."""
         student_id = 1
         update_payload = StudentRequest(
             name="Updated Student Name",
@@ -84,7 +84,7 @@ class TestStudentsAPI(BaseApiTestClass):
         assert updated.name == "Updated Student Name"
 
     def test_partial_update_student(self):
-        """Test: PATCH /api/students/{id}/ partially updates student."""
+        """Test: PATCH /api_async/students/{id}/ partially updates student."""
         student_id = 1
         partial_payload = {
             "email": "partial_update@example.com"
@@ -97,7 +97,7 @@ class TestStudentsAPI(BaseApiTestClass):
          .assert_key_equals("email", "partial_update@example.com"))
 
     def test_delete_student(self):
-        """Test: DELETE /api/students/{id}/ deletes student."""
+        """Test: DELETE /api_async/students/{id}/ deletes student."""
         # Create a student, then delete it
         create_payload = StudentRequest(
             name="ToDeleteStudent",

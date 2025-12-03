@@ -14,7 +14,7 @@ Uses asyncio to simulate concurrent API calls via Playwright.
 
 import pytest
 import asyncio
-from tests.api.base_api_test import PlaywrightApiClient
+from tests.api_async.base_api_test import PlaywrightApiClient
 
 
 @pytest.mark.asyncio

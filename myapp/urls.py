@@ -28,5 +28,5 @@ urlpatterns = [
     path('courses/update/<pk>', views.CourseUpdateView.as_view(), name='updatecourse'),
 
     # API routes
-    path('api/', include(router.urls)),
+    path('api_sync/', include(router.urls)),
 ]

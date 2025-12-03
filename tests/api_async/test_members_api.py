@@ -1,15 +1,14 @@
 """Members API Tests.
 
-Tests CRUD operations on /api/members/ endpoint.
+Tests CRUD operations on /api_async/members/ endpoint.
 Inherits from BaseApiTestClass and uses data models from api_models.
 Demonstrates request/response validation and fluent validator chains.
 """
 
 import pytest
-from tests.api.base_api_test import BaseApiTestClass
-from tests.api.api_models import (
-    MemberRequest, MemberResponse, ApiValidator,
-    HttpMethod
+from tests.api_async.base_api_test import BaseApiTestClass
+from tests.api_async.api_models import (
+    MemberRequest, MemberResponse, ApiValidator
 )
 
 
@@ -19,7 +18,7 @@ class TestMembersAPI(BaseApiTestClass):
     MEMBERS_ENDPOINT = "members"
 
     def test_list_members(self):
-        """Test: GET /api/members/ returns member list."""
+        """Test: GET /api_async/members/ returns member list."""
         response = self.get(self.MEMBERS_ENDPOINT)
 
         # Fluent validation chain
@@ -36,7 +35,7 @@ class TestMembersAPI(BaseApiTestClass):
             ApiValidator.assert_field_not_empty(validated, "lastname")
 
     def test_create_member(self):
-        """Test: POST /api/members/ creates a new member."""
+        """Test: POST /api_async/members/ creates a new member."""
         payload = MemberRequest(
             first_name="API_Test",
             last_name="Member",
@@ -60,7 +59,7 @@ class TestMembersAPI(BaseApiTestClass):
         self.created_member_id = created.id
 
     def test_get_member_detail(self):
-        """Test: GET /api/members/{id}/ returns member detail."""
+        """Test: GET /api_async/members/{id}/ returns member detail."""
         # Use first member (id=1) for test
         member_id = 1
         response = self.get(f"{self.MEMBERS_ENDPOINT}/{member_id}")
@@ -73,7 +72,7 @@ class TestMembersAPI(BaseApiTestClass):
         assert member.id == member_id
 
     def test_update_member(self):
-        """Test: PUT /api/members/{id}/ updates member."""
+        """Test: PUT /api_async/members/{id}/ updates member."""
         member_id = 1
         update_payload = MemberRequest(
             first_name="UpdatedName",
@@ -91,7 +90,7 @@ class TestMembersAPI(BaseApiTestClass):
         assert updated.first_name == "UpdatedName"
 
     def test_partial_update_member(self):
-        """Test: PATCH /api/members/{id}/ partially updates member."""
+        """Test: PATCH /api_async/members/{id}/ partially updates member."""
         member_id = 1
         partial_payload = {"designation": "Partial Update Designation"}
 
@@ -102,7 +101,7 @@ class TestMembersAPI(BaseApiTestClass):
          .assert_key_equals("designation", "Partial Update Designation"))
 
     def test_delete_member(self):
-        """Test: DELETE /api/members/{id}/ deletes member."""
+        """Test: DELETE /api_async/members/{id}/ deletes member."""
         # Create a member first, then delete it
         create_payload = MemberRequest(
             first_name="ToDelete",

@@ -249,7 +249,7 @@ class PlaywrightApiClient:
     """
 
     BASE_URL = "http://127.0.0.1:8000"
-    API_PREFIX = "/api"
+    API_PREFIX = "/api_async"
     
     # Rate limiting configuration
     MAX_RETRIES = 3
@@ -455,14 +455,14 @@ class BaseApiTestClass:
     Can be used in both async and sync test contexts.
     """
 
-    def __init__(self, page=None):
-        """Initialize with optional page object.
-        
-        Args:
-            page: Playwright Page object (will be provided by fixture)
-        """
-        self.page = page
-        self.client = None
+    # def __init__(self, page=None):
+    #     """Initialize with optional page object.
+    #
+    #     Args:
+    #         page: Playwright Page object (will be provided by fixture)
+    #     """
+    #     self.page = page
+    #     self.client = None
 
     def _get_client(self):
         """Get or create Playwright API client."""

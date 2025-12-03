@@ -1,3 +1,7 @@
+djangorestframework-simplejwt
+pytest-playwright
+playwright
+pyjwt
 pytest-xdist
 pytest-asyncio
 allure-pytest

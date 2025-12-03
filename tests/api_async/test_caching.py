@@ -13,7 +13,7 @@ RFC 7232 HTTP/1.1 Conditional Requests (ETags)
 """
 
 import pytest
-from tests.api.base_api_test import PlaywrightApiClient
+from tests.api_async.base_api_test import PlaywrightApiClient
 
 
 @pytest.mark.asyncio

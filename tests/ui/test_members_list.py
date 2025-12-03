@@ -1,5 +1,5 @@
 import pytest
-from TrainingPortal.tests.ui.base_test import BaseTestClass
+from tests.ui.base_test import BaseTestClass
 
 
 
@@ -15,6 +15,3 @@ class TestMemberCreation(BaseTestClass):
         self.members_page.goto_members_list()
         count_before = self.members_page.get_members_count()
         self.assert_page_loaded(self.members_page, "is_members_page_loaded")
-
-
-    def  test_elements_visble(self):

@@ -1,12 +1,12 @@
 """Courses API Tests.
 
-Tests CRUD operations on /api/courses/ endpoint.
+Tests CRUD operations on /api_async/courses/ endpoint.
 Inherits from BaseApiTestClass and uses data models from api_models.
 """
 
 import pytest
-from tests.api.base_api_test import BaseApiTestClass
-from tests.api.api_models import (
+from tests.api_async.base_api_test import BaseApiTestClass
+from tests.api_async.api_models import (
     CourseRequest, CourseResponse, CourseCategory, ApiValidator
 )
 
@@ -17,7 +17,7 @@ class TestCoursesAPI(BaseApiTestClass):
     COURSES_ENDPOINT = "courses"
 
     def test_list_courses(self):
-        """Test: GET /api/courses/ returns course list."""
+        """Test: GET /api_async/courses/ returns course list."""
         response = self.get(self.COURSES_ENDPOINT)
 
         (self.validate(response)
@@ -32,7 +32,7 @@ class TestCoursesAPI(BaseApiTestClass):
             ApiValidator.assert_field_not_empty(validated, "course_name")
 
     def test_create_course(self):
-        """Test: POST /api/courses/ creates a new course."""
+        """Test: POST /api_async/courses/ creates a new course."""
         payload = CourseRequest(
             course_name="API Test Course",
             facultyname_id=1,  # Assume faculty id=1 exists
@@ -53,7 +53,7 @@ class TestCoursesAPI(BaseApiTestClass):
         self.created_course_id = created.id
 
     def test_get_course_detail(self):
-        """Test: GET /api/courses/{id}/ returns course detail."""
+        """Test: GET /api_async/courses/{id}/ returns course detail."""
         course_id = 1
         response = self.get(f"{self.COURSES_ENDPOINT}/{course_id}")
 
@@ -65,7 +65,7 @@ class TestCoursesAPI(BaseApiTestClass):
         assert course.id == course_id
 
     def test_update_course(self):
-        """Test: PUT /api/courses/{id}/ updates course."""
+        """Test: PUT /api_async/courses/{id}/ updates course."""
         course_id = 1
         update_payload = CourseRequest(
             course_name="Updated Course Name",
@@ -85,7 +85,7 @@ class TestCoursesAPI(BaseApiTestClass):
         assert updated.category == CourseCategory.WEB_DEV.value
 
     def test_partial_update_course(self):
-        """Test: PATCH /api/courses/{id}/ partially updates course."""
+        """Test: PATCH /api_async/courses/{id}/ partially updates course."""
         course_id = 1
         partial_payload = {
             "category": CourseCategory.DATA_ANALYSIS.value
@@ -98,7 +98,7 @@ class TestCoursesAPI(BaseApiTestClass):
          .assert_key_equals("category", CourseCategory.DATA_ANALYSIS.value))
 
     def test_delete_course(self):
-        """Test: DELETE /api/courses/{id}/ deletes course."""
+        """Test: DELETE /api_async/courses/{id}/ deletes course."""
         # Create a course, then delete it
         create_payload = CourseRequest(
             course_name="ToDeleteCourse",

@@ -8,7 +8,12 @@ class Members(models.Model):
     firstname = models.CharField(max_length=255)
     lastname = models.CharField(max_length=255)
     designation = models.CharField(max_length=255,default='Developer')
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(
+        upload_to="images",
+        blank=True,
+        null=True,
+        default="images/member.jpg"
+    )
     #image_id = models.ForeignKey(MemberImage, on_delete=models.CASCADE )
    # image_id = models.CharField(max_length=20, default= "")
 

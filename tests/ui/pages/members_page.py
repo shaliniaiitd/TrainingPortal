@@ -25,7 +25,7 @@ class MembersPage(BasePage):
         self.goto("/myapp/members/")
         return self
 
-    def is_members_page_loaded(self) -> bool:
+    def is_page_loaded(self) -> bool:
         """Check if members page is loaded."""
         return self.page.title() == self.EXPECTED_TITLE
 

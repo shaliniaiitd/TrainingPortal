@@ -15,7 +15,7 @@ Interview-ready REST API best practices testing with Playwright.
 
 import pytest
 from urllib.parse import urlparse
-from tests.api.base_api_test import PlaywrightApiClient
+from tests.api_async.base_api_test import PlaywrightApiClient
 
 
 @pytest.mark.asyncio
@@ -115,12 +115,12 @@ class TestHATEOASLinks:
             parsed = urlparse(self_link)
             path = parsed.path
             
-            # Remove /api prefix if present and query
+            # Remove /api_async prefix if present and query
             if path.startswith("/"):
                 path = path[1:]  # Remove leading /
             
-            if path.startswith("api/"):
-                path = path[4:]  # Remove api/ prefix
+            if path.startswith("api_async/"):
+                path = path[4:]  # Remove api_async/ prefix
             
             # Navigate using the link
             resp = await client.get(path)
@@ -208,8 +208,8 @@ class TestPaginationLinks:
             if parsed.query:
                 path_with_query += f"?{parsed.query}"
             
-            # Remove /api prefix
-            if path_with_query.startswith("/api/"):
+            # Remove /api_async prefix
+            if path_with_query.startswith("/api_async/"):
                 path_with_query = path_with_query[5:]
             elif path_with_query.startswith("/"):
                 path_with_query = path_with_query[1:]
@@ -363,7 +363,7 @@ class TestLinkValidity:
             
             if self_link:
                 # Navigate to it
-                nav_resp = await client.get(self_link.lstrip("/api/").lstrip("/"))
+                nav_resp = await client.get(self_link.lstrip("/api_async/").lstrip("/"))
                 assert nav_resp.is_success()
 
     async def test_created_resource_location_header(self, page):

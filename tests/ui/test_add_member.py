@@ -1,5 +1,5 @@
 import pytest
-from TrainingPortal.tests.ui.base_test import BaseTestClass
+from tests.ui.base_test import BaseTestClass
 @pytest.mark.page("addmember")
 class TestMemberCreation(BaseTestClass):
 

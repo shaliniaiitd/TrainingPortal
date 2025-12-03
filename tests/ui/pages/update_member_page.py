@@ -16,7 +16,7 @@ class UpdateMemberPage(AddMemberPage):
     def goto_page(self, member_id: int) -> "UpdateMemberPage":
         """Navigate to update member page by member ID."""
         self.goto(f"/myapp/members/update/{member_id}"),
-        time.sleep(12)
+        time.sleep(2)
         return self
 
     def is_update_form_loaded(self) -> bool:

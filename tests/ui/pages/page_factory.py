@@ -41,6 +41,7 @@ class PageFactory:
         "add_course": ("add_course_page", "AddCoursePage"),
         "update_course": ("update_course_page", "UpdateCoursePage"),
         "course_detail": ("course_detail_page", "CourseDetailPage"),
+        "delete_member": ("delete_member_page", "DeleteMemberPage")
     }
 
     @classmethod

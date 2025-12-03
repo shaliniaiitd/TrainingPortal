@@ -13,7 +13,7 @@ Interview-ready patterns showing production-grade resilience.
 import pytest
 import time
 from unittest.mock import patch, MagicMock
-from tests.api.base_api_test import BaseApiTestClass, ApiResponse, RateLimitMetrics
+from tests.api_async.base_api_test import BaseApiTestClass, ApiResponse, RateLimitMetrics
 
 
 class TestRateLimitHandling(BaseApiTestClass):

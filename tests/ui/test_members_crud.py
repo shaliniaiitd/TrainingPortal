@@ -6,21 +6,33 @@ and use the Builder (FormBuilder) where helpful.
 """
 
 import pytest
-from TrainingPortal.tests.ui.base_test import BaseTestClass
+from tests.ui.base_test import BaseTestClass
 
 @pytest.mark.page("members")
 class TestMemberCreation(BaseTestClass):
     """CRUD tests for Members — inherits from BaseTestClass."""
 
-    def test_member_page_loaded(self,page_obj):
+    def test_members_page_loaded(self,page_obj):
+        assert page_obj.is_page_loaded() == True
+
+    def test_has_table(self):
+        assert page_obj.has_table() == True
+
+    def test_add_member_btn_visibility(self):
+        assert page_obj.is_add_member_button_visible()
+
+    def test_click_add_member_page_loaded(self,page_obj):
+        page_obj.click_add_member()
+        assert "addmember" in page_obj.get_current_url()
+        #self.assert_page_loaded(page_obj, "is_form_loaded")
         """Test: Create a new member."""
-
-        count_before = page_obj.get_members_count()
-
+    def test_add_member_form_loaded(self):
         add_page = self.get_page("addmember")
         add_page.goto_page()
         assert "addmember" in add_page.get_current_url()
         self.assert_page_loaded(add_page, "is_form_loaded")
+
+    def test_add_member(self,page_obj):
 
         # Build form using FormBuilder (fluent) — demonstrates Builder usage
         form = (
@@ -77,18 +89,20 @@ class TestMemberCreation(BaseTestClass):
         heading = detail.get_page_heading()
         assert new_first.lower() in str(heading).lower(), f"Updated name not found in heading: {heading}"
 
-    @pytest.mark.page("member_list", id=10)
-    def test_delete_member(self):
+    @pytest.mark.page("delete_member", id=10)
+    def test_delete_member(self,page_obj):
         """Test: Delete a member."""
         members = self.get_page("members")
-        members.goto_members_list()
+        members.goto_page()
         initial = members.get_members_count()
 
         # Attempt delete first member if exists
         if initial == 0:
             pytest.skip("No members available to delete")
 
-        members.click_delete_member(0)
+        members.click_delete_member(id)
+        delete_member = self.get_page("delete_member")
+        delete_member.goto_page()
         # Some apps show confirmation; try clicking first confirm button if present
         try:
             self.page.click("button:has-text('Confirm'), button:has-text('Yes')")
@@ -96,7 +110,7 @@ class TestMemberCreation(BaseTestClass):
             pass# def test_delete_member(self):
         """Test: Delete a member."""
         members = self.get_page("members")
-        members.goto_members_list()  #     """Test: Delete a member."""
+        members.goto_page()  #     """Test: Delete a member."""
 
         initial = members.get_members_count()
 
@@ -107,12 +121,14 @@ class TestMemberCreation(BaseTestClass):
         members.click_delete_member(0)
         # Some apps show confirmation; try clicking first confirm b
         try:
-            self.page.click("button:has-text('Confirm'), button:has
+            self.page.click("button:has-text('Confirm')")
         except Exception:
             pass
 
         # Reload list and verify count decreased
-        members.goto_members_list()
+        members = self.get_page("members")
+        members.goto_page()
+        # members.goto_members_page()
         after = members.get_members_count()
         self.assert_count_decreased(initial, after, delta=1)
 
@@ -128,7 +144,7 @@ class TestMemberCreation(BaseTestClass):
             pass
 
         # Reload list and verify count decreased
-        members.goto_members_list()
+        members.goto_page()
         after = members.get_members_count()
         self.assert_count_decreased(initial, after, delta=1)
         initial = members.get_members_count()
@@ -145,12 +161,12 @@ class TestMemberCreation(BaseTestClass):
             pass
 
         # Reload list and verify count decreased
-        members.goto_members_list()
+        members.goto_page()
         after = members.get_members_count()
         self.assert_count_decreased(initial, after, delta=1)
 
 
         # Reload list and verify count decreased
-        members.goto_members_list()
+        members.goto_page()
         after = members.get_members_count()
         self.assert_count_decreased(initial, after, delta=1)
